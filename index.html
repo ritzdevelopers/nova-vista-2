@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova Vista Education</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              crimson: "#A51C30",
+              crimsonDark: "#821327",
+              parchment: "#F7F3ED",
+              slateInk: "#1F2A37",
+              gold: "#D4AF37"
+            },
+            fontFamily: {
+              serif: ["'Merriweather'", "serif"],
+              sans: ["'Inter'", "system-ui", "sans-serif"]
+            },
+            boxShadow: {
+              editorial: "0 20px 45px rgba(15, 23, 42, 0.08)"
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        @apply font-sans bg-parchment text-slateInk antialiased;
+      }
+      .section-heading {
+        @apply text-4xl md:text-5xl font-serif tracking-tight text-slateInk;
+      }
+      .kicker {
+        @apply uppercase text-xs tracking-[0.35em] text-crimson font-semibold;
+      }
+      .card {
+        @apply bg-white rounded-2xl shadow-editorial border border-slate-100;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-parchment text-slateInk font-sans antialiased selection:bg-crimson selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
