@@ -9,16 +9,42 @@ interface HeroProps {
 }
 
 export default function Hero({ tagline, headline, subline }: HeroProps) {
+  const scrollToSection = (hash: string) => {
+    if (hash.startsWith('#')) {
+      hash = hash.substring(1);
+    }
+    const element = document.getElementById(hash);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    if (href.startsWith('/#')) {
+      const hash = href.substring(2); // Remove '/#'
+      scrollToSection(hash);
+    }
+  };
   return (
     <section className="relative isolate overflow-hidden min-h-[85vh] flex items-center">
       {/* Background Image with Gradient Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(31, 42, 55, 0.85) 0%, rgba(165, 28, 48, 0.75) 100%), url('https://picsum.photos/2400/1600?grayscale')`
-        }}
+          backgroundImage: `linear-gradient(135deg, rgba(31, 42, 55, 0.85) 0%, rgba(165, 28, 48, 0.75) 100%), url('./static/s1/s1-bg.jpg')`,
+          backgroundPosition: 'top ',
+          backgroundRepeat: 'no-repeat',
+        }} 
       />
-      
+      {/* https://picsum.photos/2400/1600?grayscale */}
       {/* Decorative Elements */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 z-0 mix-blend-overlay"></div>
 
@@ -67,12 +93,13 @@ export default function Hero({ tagline, headline, subline }: HeroProps) {
             >
               Start Your Journey
             </Link>
-            <Link 
-              to="/#academic" 
+            <a
+              href="/#academic"
+              onClick={(e) => handleHashClick(e, '/#academic')}
               className="px-8 py-4 border border-white/30 text-white rounded-full font-semibold text-base hover:bg-white/10 transition-all backdrop-blur-sm"
             >
               Explore Programs
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>

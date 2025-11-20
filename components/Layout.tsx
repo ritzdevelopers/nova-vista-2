@@ -20,10 +20,38 @@ export default function Layout() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle hash navigation
+  const scrollToSection = (hash: string) => {
+    if (hash.startsWith('#')) {
+      hash = hash.substring(1);
+    }
+    const element = document.getElementById(hash);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('/#')) {
+      e.preventDefault();
+      const hash = href.substring(2); // Remove '/#'
+      scrollToSection(hash);
+      setMobileMenuOpen(false);
+    }
+  };
+
   const navLinks = [
     { label: "Home", href: "/" },
+    { label: "About", href: "/#about" },
     { label: "Academic Recognition", href: "/#academic" },
-    { label: "Skill Development", href: "/#skills" },
+    { label: "Personality Development", href: "/#personality" },
     { label: "Contact", href: "/contact" },
   ];
 
@@ -48,25 +76,37 @@ export default function Layout() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link to="/" className="flex flex-col group">
-            <span className="text-2xl md:text-3xl font-serif text-crimson font-bold tracking-tighter group-hover:opacity-90 transition-opacity">
-              NOVA VISTA
-            </span>
-            <span className="text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] text-slateInk/60">Education</span>
+          <Link to="/" className="group transition-opacity hover:opacity-90">
+            <img 
+              src="/static/nova-logo-1.png" 
+              alt="Nova Vista Education" 
+              className="h-12 md:h-16 lg:h-16 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link 
-                key={link.label} 
-                to={link.href} 
-                className={`text-sm font-medium transition-colors uppercase tracking-wider ${
-                  location.pathname === link.href ? "text-crimson" : "text-slateInk/70 hover:text-crimson"
-                }`}
-              >
-                {link.label}
-              </Link>
+              link.href.startsWith('/#') ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-sm font-medium transition-colors uppercase tracking-wider text-slateInk/70 hover:text-crimson"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link 
+                  key={link.label} 
+                  to={link.href} 
+                  className={`text-sm font-medium transition-colors uppercase tracking-wider ${
+                    location.pathname === link.href ? "text-crimson" : "text-slateInk/70 hover:text-crimson"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
             <Link 
               to="/contact" 
@@ -101,14 +141,25 @@ export default function Layout() {
           >
             <nav className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.label} 
-                  to={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-serif text-slateInk hover:text-crimson"
-                >
-                  {link.label}
-                </Link>
+                link.href.startsWith('/#') ? (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="text-lg font-serif text-slateInk hover:text-crimson"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link 
+                    key={link.label} 
+                    to={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-lg font-serif text-slateInk hover:text-crimson"
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
             </nav>
           </motion.div>
@@ -124,7 +175,11 @@ export default function Layout() {
       <footer className="bg-slateInk text-white py-16 border-t border-white/10">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 px-6">
           <div className="col-span-1 md:col-span-1">
-            <span className="text-2xl font-serif text-white font-bold tracking-tight block mb-4">NOVA VISTA</span>
+            <img 
+              src="./static/nova-logo-2.png" 
+              alt="Nova Vista Education" 
+              className="h-12 md:h-16 lg:h-20 w-auto object-contain mb-4"
+            />
             <p className="text-white/60 text-sm leading-relaxed">
               Empowering Growth. Elevating Futures through academic recognition and skill enhancement.
             </p>
@@ -140,8 +195,8 @@ export default function Layout() {
           <div>
             <p className="kicker text-white/40 mb-6">Programs</p>
             <ul className="space-y-3 text-sm text-white/70">
-              <li><Link to="/#academic" className="hover:text-white transition-colors">Academic Recognition</Link></li>
-              <li><Link to="/#skills" className="hover:text-white transition-colors">Skill Development</Link></li>
+              <li><a href="/#academic" onClick={(e) => handleNavClick(e, '/#academic')} className="hover:text-white transition-colors">Academic Recognition</a></li>
+              <li><a href="/#personality" onClick={(e) => handleNavClick(e, '/#personality')} className="hover:text-white transition-colors">Personality Development</a></li>
               <li><Link to="/contact" className="hover:text-white transition-colors">Admissions</Link></li>
             </ul>
           </div>
