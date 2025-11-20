@@ -39,7 +39,7 @@ export default function Hero({ tagline, headline, subline }: HeroProps) {
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(31, 42, 55, 0.85) 0%, rgba(165, 28, 48, 0.75) 100%), url('./static/s1/s1-bg.jpg')`,
+          backgroundImage: `linear-gradient(135deg, rgba(31, 42, 55, 0.85) 0%, rgba(165, 28, 48, 0.75) 100%), url('/s1/s1-bg.jpg')`,
           backgroundPosition: 'top ',
           backgroundRepeat: 'no-repeat',
         }} 

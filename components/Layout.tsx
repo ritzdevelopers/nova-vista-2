@@ -78,7 +78,7 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link to="/" className="group transition-opacity hover:opacity-90">
             <img 
-              src="/static/nova-logo-1.png" 
+              src="/nova-logo-1.png" 
               alt="Nova Vista Education" 
               className="h-12 md:h-16 lg:h-16 w-auto object-contain"
             />
@@ -176,7 +176,7 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 px-6">
           <div className="col-span-1 md:col-span-1">
             <img 
-              src="./static/nova-logo-2.png" 
+              src="/nova-logo-2.png" 
               alt="Nova Vista Education" 
               className="h-12 md:h-16 lg:h-20 w-auto object-contain mb-4"
             />

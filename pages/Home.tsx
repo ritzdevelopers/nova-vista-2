@@ -528,7 +528,7 @@ export default function Home() {
               >
                 <div className="h-48 bg-slate-200 relative overflow-hidden">
                   <img 
-                    src={`./static/s3/s3-i1.jpg`} 
+                    src="/s3/s3-i1.jpg" 
                     alt="Article thumbnail" 
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
                   />
